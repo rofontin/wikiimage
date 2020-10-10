@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:wikiimage/banco/wikiimage_db.dart';
 import 'package:wikiimage/wikiimage_page.dart';
 
+enum OrderOptions {orderaz, orderza}
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -26,8 +28,31 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("WikiImage"),
-        backgroundColor: Color(0xFFAE74),
+        backgroundColor: Colors.deepOrange[200],
         centerTitle: true,
+        actions: <Widget>[
+          PopupMenuButton<OrderOptions>(
+            itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
+              const PopupMenuItem<OrderOptions>(
+                child: Text("Ordenar de A-Z"),
+                value: OrderOptions.orderaz,
+              ),
+              const PopupMenuItem<OrderOptions>(
+                child: Text("Ordenar de Z-A"),
+                value: OrderOptions.orderza,
+              ),
+            ],
+            onSelected: _orderList,
+          )
+        ],
+      ),
+      backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          _showikiImagePage();
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.red,
       ),
       body: ListView.builder(
         padding: EdgeInsets.all(10.0),
@@ -90,25 +115,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showOptions(BuildContext context, int index){
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => 
-      BottomSheet(
-        onClosing: (){},
-        builder: (context) =>
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
+    showModalBottomSheet(context: context, 
+      builder: (context){
+        return BottomSheet(
+          onClosing: (){},
+          builder: (context){
+            return Container(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
                     padding: EdgeInsets.all(10.0),
                     child: FlatButton(
                     child: Text("Editar", 
-                      style: TextStyle(color: Colors.red, fontSize: 20.0)),
+                      style: TextStyle(color: Colors.deepOrange[200], fontSize: 20.0)),
                     onPressed: (){
                       Navigator.pop(context);
-                      //_showikiImagePage(wikiImage: wikiImages[index]);
+                      _showikiImagePage(wikiImage: wikiImages[index]);
                     },
                   ),
                   ),
@@ -116,24 +140,25 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(10.0),
                     child: FlatButton(
                     child: Text("Excluir", 
-                      style: TextStyle(color: Colors.red, fontSize: 20.0)),
+                      style: TextStyle(color: Colors.deepOrange[200], fontSize: 20.0)),
                     onPressed: (){
                       wikiImageDB.deleteWikiImage(wikiImages[index].idWikiImage);
                       setState(() {
-                         wikiImages.removeAt(index);
+                        wikiImages.removeAt(index);
                         Navigator.pop(context);
                       });
                     },
                   ),
                   ),
-              ],
-            ),
-          ),
-      ),
-    );
+                ],
+              ),
+            );
+          },
+        );
+      });
   }
 
-  void _showContactPage({WikiImage wikiImage}) async {
+  void _showikiImagePage({WikiImage wikiImage}) async {
    final recWikiImage = await Navigator.push(context, 
       MaterialPageRoute(builder: (context)=> WikiImagePage(wikiImage: wikiImage,))
     );
@@ -146,5 +171,24 @@ class _HomePageState extends State<HomePage> {
       }
       _getAllWikiImage();
     }
+  }
+
+  void _orderList(OrderOptions result){
+    switch(result){
+      case OrderOptions.orderaz:
+        wikiImages.sort((a,b){
+          return a.nome.toLowerCase().compareTo(b.nome.toLowerCase());
+        });
+        break;
+
+      case OrderOptions.orderza:
+        wikiImages.sort((a,b){
+          return b.nome.toLowerCase().compareTo(a.nome.toLowerCase());
+        });
+        break;
+    }
+    setState(() {
+      
+    });
   }
 }
