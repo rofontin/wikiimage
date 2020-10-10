@@ -124,7 +124,7 @@ class WikiImage {
 
   @override
   String toString() {
-    return "Contact(idContact: $idWikiImage, nome: $nome, email: $description, img: $img)";
+    return "WikiImage(idWikiImage: $idWikiImage, nome: $nome, description: $description, img: $img)";
   }
 
 }
