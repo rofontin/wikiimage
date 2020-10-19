@@ -77,37 +77,46 @@ class _HomePageState extends State<HomePage> {
       child: Card(
         child: Padding(
           padding: EdgeInsets.all(10.0),
-          child: Row(
-            children: <Widget>[
-              Container(
-                width: 80.0,
-                height: 80.0,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  image: DecorationImage(
-                    image: wikiImages[index].img != null ?
-                      FileImage(File(wikiImages[index].img)): AssetImage("images/image.png")
-                  )
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+              children: <Widget>[
+                Row(
                   children: <Widget>[
-                    Text(wikiImages[index].nome ?? "",
-                      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                    Container(
+                      width: 360.0,
+                      height: 200.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        image: DecorationImage(
+                          image: wikiImages[index].img != null ?
+                            FileImage(File(wikiImages[index].img)): AssetImage("images/image.png"),
+                          fit: BoxFit.cover
+                        )
+                      ),
                     ),
-                    Text(wikiImages[index].description ?? "",
-                      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(wikiImages[index].nome ?? "",
+                              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                            ),
+                            Text(wikiImages[index].description ?? "",
+                              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
                     )
                   ],
                 ),
-              )
-            ],
-          ),
+              ],
+            ),
+          )
         ),
-      ),
       onTap: (){
         _showOptions(context, index);
       },
