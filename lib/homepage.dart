@@ -81,18 +81,20 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    Container(
+                    Expanded(
+                    child: Container(
                       width: 360.0,
                       height: 200.0,
                       decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         image: DecorationImage(
                           image: wikiImages[index].img != null ?
-                            FileImage(File(wikiImages[index].img)): AssetImage("images/image.png"),
+                            FileImage(File(wikiImages[index].img)): AssetImage("images/semimagem.jpg"),
                           fit: BoxFit.cover
                         )
                       ),
                     ),
+                    )
                   ],
                 ),
                 Row(

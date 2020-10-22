@@ -72,7 +72,7 @@ class _WikiImagePageState extends State<WikiImagePage> {
                   image: DecorationImage(
                     image: _editedWikiImage.img != null ?
                       FileImage(File(_editedWikiImage.img)) :
-                        AssetImage("images/image.png")
+                        AssetImage("images/semimagem.jpg")
                   )
                 ),
               ),
