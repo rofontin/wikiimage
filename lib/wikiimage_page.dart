@@ -68,7 +68,7 @@ class _WikiImagePageState extends State<WikiImagePage> {
                 width: 140.0,
                 height: 140.0,
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  shape: BoxShape.rectangle,
                   image: DecorationImage(
                     image: _editedWikiImage.img != null ?
                       FileImage(File(_editedWikiImage.img)) :

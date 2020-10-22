@@ -104,7 +104,7 @@ class WikiImage {
   WikiImage.fromMap(Map map){
     idWikiImage = map[idColumn];
     nome = map[nameColumn];
-    description = map[description];
+    description = map[descriptionColumn];
     img = map[imgColumn];
   }
 

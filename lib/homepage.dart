@@ -108,8 +108,8 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                             ),
                             Text(wikiImages[index].description ?? "",
-                              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
-                            )
+                              style: TextStyle(fontSize: 15.0),
+                            ),
                           ],
                         ),
                     )
