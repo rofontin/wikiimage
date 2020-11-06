@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:wikiimage/banco/search_wikiimage.dart';
 import 'package:wikiimage/banco/wikiimage_db.dart';
 import 'package:wikiimage/wikiimage_page.dart';
 
@@ -15,6 +16,7 @@ class _HomePageState extends State<HomePage> {
 
   WikiImageDB wikiImageDB = WikiImageDB();
   List<WikiImage> wikiImages = List();
+  List<String> listNames = List();
 
   @override
   void initState() {
@@ -23,45 +25,55 @@ class _HomePageState extends State<HomePage> {
     _getAllWikiImage();
   }
 
-  @override
+
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("WikiImage"),
-        backgroundColor: Colors.deepOrange[200],
-        centerTitle: true,
-        actions: <Widget>[
-          PopupMenuButton<OrderOptions>(
-            itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
-              const PopupMenuItem<OrderOptions>(
-                child: Text("Ordenar de A-Z"),
-                value: OrderOptions.orderaz,
-              ),
-              const PopupMenuItem<OrderOptions>(
-                child: Text("Ordenar de Z-A"),
-                value: OrderOptions.orderza,
-              ),
-            ],
-            onSelected: _orderList,
-          )
-        ],
-      ),
-      backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          _showikiImagePage();
-        },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.red,
-      ),
-      body: ListView.builder(
-        padding: EdgeInsets.all(10.0),
-        itemCount: wikiImages.length,
-        itemBuilder: (context, index){
-          return _wikiImageCard(context, index);
-        },
-      ) 
-    );
+        appBar: AppBar(
+          title: Text("WikiImage"),
+          backgroundColor: Colors.deepOrange[200],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+    
+              for (var item in wikiImages) {
+                    listNames.add(item.nome);
+                  }
+
+                showSearch(context: context, delegate: Search(listNames));
+              },
+            ),
+            PopupMenuButton<OrderOptions>(
+              itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
+                const PopupMenuItem<OrderOptions>(
+                  child: Text("Ordenar de A-Z"),
+                  value: OrderOptions.orderaz,
+                ),
+                const PopupMenuItem<OrderOptions>(
+                  child: Text("Ordenar de Z-A"),
+                  value: OrderOptions.orderza,
+                ),
+              ],
+              onSelected: _orderList,
+            )
+          ],
+        ),
+        backgroundColor: Colors.white,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _showikiImagePage();
+          },
+          child: Icon(Icons.add),
+          backgroundColor: Colors.red,
+        ),
+        body: ListView.builder(
+          padding: EdgeInsets.all(10.0),
+          itemCount: wikiImages.length,
+          itemBuilder: (context, index) {
+            return _wikiImageCard(context, index);
+          },
+        ));
   }
 
   void _getAllWikiImage(){
