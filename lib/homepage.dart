@@ -16,7 +16,6 @@ class _HomePageState extends State<HomePage> {
 
   WikiImageDB wikiImageDB = WikiImageDB();
   List<WikiImage> wikiImages = List();
-  List<String> listNames = List();
 
   @override
   void initState() {
@@ -36,12 +35,7 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
-    
-              for (var item in wikiImages) {
-                    listNames.add(item.nome);
-                  }
-
-                showSearch(context: context, delegate: Search(listNames));
+                showSearch(context: context, delegate: Search(wikiImages));
               },
 
             ),

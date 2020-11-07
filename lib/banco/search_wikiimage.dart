@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:wikiimage/banco/wikiimage_db.dart';
 
 class Search extends SearchDelegate{
 
   String selectedResult;
-
-  final List<String> listNames;
-  Search(this.listNames);
+  WikiImageDB wikiImageDB = WikiImageDB();
+  final List<WikiImage> wikiImages;
+  Search(this.wikiImages);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -43,6 +44,12 @@ class Search extends SearchDelegate{
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> suggestion = [];
+    List<String> listNames = [];
+
+    for (var item in wikiImages) {
+      listNames.add(item.nome);
+    }
+
     query.isEmpty ? suggestion = recentList : suggestion.addAll(listNames.where((element) => element.contains(query)));
 
     return ListView.builder(
@@ -54,6 +61,14 @@ class Search extends SearchDelegate{
           ),
           onTap: (){
             selectedResult = suggestion[index];
+            WikiImage wikiImage = WikiImage();
+            
+            for (var item in wikiImages) {
+              if(selectedResult == item.nome){
+                wikiImage = item;
+              }
+            }
+
             showResults(context);
           },
         );
