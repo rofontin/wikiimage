@@ -52,6 +52,10 @@ class Search extends SearchDelegate{
           title: Text(
             suggestion[index]
           ),
+          onTap: (){
+            selectedResult = suggestion[index];
+            showResults(context);
+          },
         );
       },
     );

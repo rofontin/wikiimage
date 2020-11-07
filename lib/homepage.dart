@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
 
                 showSearch(context: context, delegate: Search(listNames));
               },
+
             ),
             PopupMenuButton<OrderOptions>(
               itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             _showikiImagePage();
           },
           child: Icon(Icons.add),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.deepOrange[200],
         ),
         body: ListView.builder(
           padding: EdgeInsets.all(10.0),

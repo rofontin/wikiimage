@@ -57,7 +57,7 @@ class _WikiImagePageState extends State<WikiImagePage> {
           }
         },
         child: Icon(Icons.save),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.deepOrange[200],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(10.0),
