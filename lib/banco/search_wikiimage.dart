@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wikiimage/banco/resultado_search.dart';
 import 'package:wikiimage/banco/wikiimage_db.dart';
 
 class Search extends SearchDelegate{
 
   String selectedResult;
-  WikiImageDB wikiImageDB = WikiImageDB();
   final List<WikiImage> wikiImages;
   Search(this.wikiImages);
 
@@ -39,7 +39,7 @@ class Search extends SearchDelegate{
     );
   }
 
-  List<String> recentList = ["Text 1 ", "Text 2 "];
+  List<String> recentList = [];
 
   @override
   Widget buildSuggestions(BuildContext context) {
@@ -69,7 +69,12 @@ class Search extends SearchDelegate{
               }
             }
 
-            showResults(context);
+            if(wikiImage != null){
+              Navigator.push(context, 
+              MaterialPageRoute(builder: (context)=> ResultadoSearch(wikiImage: wikiImage,))
+              );
+            }
+
           },
         );
       },
