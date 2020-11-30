@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wikiimage/banco/resultado_search.dart';
+import 'package:wikiimage/search/resultado_search.dart';
 import 'package:wikiimage/banco/wikiimage_db.dart';
 
 class Search extends SearchDelegate{

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:wikiimage/banco/search_wikiimage.dart';
+import 'package:wikiimage/search/search_wikiimage.dart';
 import 'package:wikiimage/banco/wikiimage_db.dart';
 import 'package:wikiimage/wikiimage_page.dart';
 
@@ -113,14 +113,28 @@ class _HomePageState extends State<HomePage> {
                           children: <Widget>[
                             Text(wikiImages[index].nome ?? "",
                               style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
-                            ),
-                            Text(wikiImages[index].description ?? "",
-                              style: TextStyle(fontSize: 15.0),
-                            ),
+                            ), 
                           ],
                         ),
                     )
                   ],
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Column(
+                          children: <Widget>[
+                            Text(wikiImages[index].description ?? "",
+                              style: TextStyle(fontSize: 15.0),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -205,8 +219,5 @@ class _HomePageState extends State<HomePage> {
         });
         break;
     }
-    setState(() {
-      
-    });
   }
 }
